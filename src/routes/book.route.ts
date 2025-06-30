@@ -6,7 +6,6 @@ import { uploadFields } from "../middlewares/upload.middleware";
 
 const router = Router();
 
-
-router.route("/books").post(adminMiddleware, uploadFields, asyncHandler(BookController.create));
+router.route("/").post(adminMiddleware, uploadFields, asyncHandler(BookController.create));
 
 export default router;

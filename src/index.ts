@@ -10,6 +10,8 @@ import { errorHandler } from "./middlewares/error.middleware";
 // internal Route Imports
 import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
+import orderRoutes from "./routes/order.route";
+import paymentRoutes from "./routes/payment.route";
 
 const port = PORT || 5000
 
@@ -25,7 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 // ROUTES
 
 app.use("/api/v1/auth", authRoutes)
-app.use("/api/v1/me", bookRoutes)
+app.use("/api/v1/books", bookRoutes)
+app.use("/api/v1/orders", orderRoutes)
+app.use("/api/v1/payments", paymentRoutes)
 
 app.get("/api/v1/healthCheck", (req, res) => {
     res.send("OK");
