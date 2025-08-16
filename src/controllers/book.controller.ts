@@ -35,4 +35,27 @@ export class BookController {
             next(error)
         }
     }
+    static async list(req: Request, res: Response, next: NextFunction) {
+        try {
+            // pagination 
+            const page = parseInt(req.query.page as string) || 1;
+            const limit = parseInt(req.query.limit as string) || 10;
+
+            const books = await BookService.listBooks(page, limit);
+
+            return res.status(200).json(new ApiResponse(200, { books }, "Success"));
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async getById(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const book = await BookService.getBookById(id);
+            return res.status(200).json(new ApiResponse(200, { book }, "Success"));
+        } catch (error) {
+            next(error)
+        }
+    }
 }

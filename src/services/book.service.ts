@@ -44,4 +44,15 @@ export class BookService {
         return book
 
     }
+
+    static async getBookById(id: string) {
+        const book = await Book.findById(id);
+        if (!book) throw new ApiError(404, "Book not found");
+        return book;
+    }
+
+    static async listBooks(page: number, limit: number) {
+        const books = await Book.find({}).skip((page - 1) * limit).limit(limit);
+        return books
+    }
 }
